@@ -1,0 +1,13 @@
+{
+  "name": "mdtopdf",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Convert Markdown to a clean Blue/Navy themed PDF (Thai supported)",
+  "scripts": {
+    "pdf": "node convert.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.56.1"
+  }
+}

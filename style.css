@@ -1,0 +1,205 @@
+/* Blue / Navy / Light Blue / White theme for university documents */
+:root {
+  --navy: #0b2545;
+  --blue: #1d4e89;
+  --mid: #3a7bd5;
+  --light: #e8f1fb;
+  --lighter: #f5f9fe;
+  --line: #c9dcf2;
+  --text: #1b2733;
+  --muted: #5a6b7d;
+}
+
+@page {
+  size: A4;
+  margin: 20mm 17mm 20mm 17mm;
+}
+
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+body {
+  font-family: "Sarabun", sans-serif;
+  font-size: 11.5pt;
+  line-height: 1.6;
+  color: var(--text);
+  background: #fff;
+  margin: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* ---------- Title banner (first h1) ---------- */
+.title-banner {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 70%, var(--mid) 100%);
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px 24px 18px;
+  margin: 0 0 18px;
+}
+.title-banner h1 {
+  color: #fff;
+  font-size: 21pt;
+  line-height: 1.35;
+  margin: 0;
+  border: none;
+  padding: 0;
+  background: none;
+}
+.title-banner .subtitle {
+  margin-top: 6px;
+  font-size: 10pt;
+  color: #d6e6fa;
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Headings ---------- */
+h1, h2, h3, h4 {
+  color: var(--navy);
+  font-weight: 700;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+/* Part headings (ส่วน A, B, ...) */
+h1 {
+  font-size: 18pt;
+  line-height: 1.35;
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border-left: 8px solid var(--mid);
+  margin: 26px 0 16px;
+}
+/* Long parts start on a fresh page (set by convert.mjs) */
+h1.new-page { break-before: page; page-break-before: always; margin-top: 0; }
+
+h2 {
+  font-size: 14.5pt;
+  color: var(--blue);
+  border-bottom: 2.5px solid var(--blue);
+  padding-bottom: 3px;
+  margin: 22px 0 10px;
+}
+
+h3 {
+  font-size: 12.5pt;
+  color: var(--navy);
+  background: var(--light);
+  border-left: 5px solid var(--mid);
+  padding: 4px 10px;
+  border-radius: 0 6px 6px 0;
+  margin: 16px 0 8px;
+}
+
+h4 { font-size: 11.5pt; color: var(--blue); margin: 12px 0 6px; }
+
+/* Keep a heading together with the first lines that follow it */
+h2 + *, h3 + *, h4 + * { break-before: avoid; page-break-before: avoid; }
+
+p { margin: 6px 0 8px; orphans: 3; widows: 3; }
+strong { color: var(--navy); font-weight: 700; }
+em { color: var(--blue); }
+
+/* ---------- Lists ---------- */
+ul, ol { margin: 4px 0 10px; padding-left: 24px; }
+li { margin: 2px 0; }
+li > ul, li > ol { margin: 2px 0 4px; }
+ul > li::marker { color: var(--mid); }
+ol > li::marker { color: var(--blue); font-weight: 700; }
+li { break-inside: avoid; page-break-inside: avoid; }
+
+/* Task list (checklist) */
+ul.task-list, ul:has(> li > input[type="checkbox"]) { list-style: none; padding-left: 6px; }
+li > input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 12px; height: 12px;
+  border: 1.6px solid var(--blue);
+  border-radius: 3px;
+  margin: 0 8px 0 0;
+  vertical-align: -1px;
+  background: #fff;
+}
+
+/* ---------- Blockquote (callout box) ---------- */
+blockquote {
+  margin: 10px 0 14px;
+  padding: 10px 16px;
+  background: var(--lighter);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--blue);
+  border-radius: 6px;
+  color: var(--text);
+  break-inside: avoid;
+}
+blockquote p:first-child { margin-top: 0; font-weight: 700; color: var(--navy); }
+blockquote ul { margin-bottom: 0; }
+
+/* ---------- Tables ---------- */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 8px 0 14px;
+  font-size: 10.5pt;
+  table-layout: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+thead th {
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  padding: 6px 8px;
+  border-right: 1px solid rgba(255,255,255,0.25);
+}
+thead th:last-child { border-right: none; }
+td {
+  padding: 5px 8px;
+  border-top: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  vertical-align: top;
+}
+td:last-child { border-right: none; }
+tbody tr:nth-child(even) td { background: var(--lighter); }
+tbody td:first-child { font-weight: 600; color: var(--navy); }
+
+/* ---------- Code / formulas ---------- */
+code {
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 9.5pt;
+  background: var(--light);
+  color: var(--navy);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+pre {
+  background: var(--lighter);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 12px;
+  white-space: pre-wrap;
+  break-inside: avoid;
+}
+.math.display { display: block; text-align: center; margin: 8px 0; }
+
+hr { display: none; } /* section breaks handled by headings */
+
+/* ---------- Exam mode: answer space ---------- */
+.answer-space {
+  margin: 6px 0 14px;
+  padding: 4px 12px 2px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  break-inside: avoid;
+}
+.answer-space .label { font-size: 9pt; color: var(--muted); }
+.answer-space .ln {
+  height: 9.5mm;
+  border-bottom: 1px dashed #9fbbe0;
+}
