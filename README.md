@@ -13,3 +13,4 @@
 ## ไฟล์ที่แปลงแล้ว
 
 - `output/lab10-11-exam-summary.pdf` สรุปก่อนสอบ ปฏิบัติการชีววิทยาพื้นฐาน แล็บ 10 และ 11
+- `output/biodiversity-lab12-summary.pdf` สรุปก่อนสอบ บทปฏิบัติการที่ 12 ความหลากหลายทางนิเวศวิทยา (Biodiversity in ecosystem)
