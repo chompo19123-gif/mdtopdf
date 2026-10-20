@@ -203,3 +203,5 @@ hr { display: none; } /* section breaks handled by headings */
   height: 9.5mm;
   border-bottom: 1px dashed #9fbbe0;
 }
+
+sub { font-size: 0.72em; line-height: 0; vertical-align: -0.25em; }

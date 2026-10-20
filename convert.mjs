@@ -72,6 +72,20 @@ await page.evaluate((exam) => {
     banner.style.breakBefore = "auto";
   }
 
+  // Plain-text subscripts in formulas: V_จม, P_net, ρ_วัตถุ -> <sub>
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const texts = [];
+  while (walker.nextNode()) if (!walker.currentNode.parentElement.closest("code, pre, math")) texts.push(walker.currentNode);
+  const subRe = /([A-Za-zα-ωΑ-Ω0-9₀-₉)])_([A-Za-z0-9ก-๙]+)/g;
+  texts.forEach((t) => {
+    if (!subRe.test(t.data)) return;
+    const span = document.createElement("span");
+    span.innerHTML = t.data
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+      .replace(subRe, "$1<sub>$2</sub>");
+    t.replaceWith(...span.childNodes);
+  });
+
   // A part heading starts a new page only when its part is long (> ~1 page of text)
   const h1s = [...document.querySelectorAll("body > h1")];
   h1s.forEach((h) => {
