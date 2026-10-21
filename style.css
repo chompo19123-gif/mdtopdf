@@ -150,6 +150,9 @@ table {
   break-inside: avoid;
   page-break-inside: avoid;
 }
+table.long { break-inside: auto; page-break-inside: auto; }
+table.long tr { break-inside: avoid; page-break-inside: avoid; }
+thead { display: table-header-group; }
 thead th {
   background: var(--blue);
   color: #fff;

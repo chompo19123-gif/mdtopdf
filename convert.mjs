@@ -76,7 +76,8 @@ await page.evaluate((exam) => {
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   const texts = [];
   while (walker.nextNode()) if (!walker.currentNode.parentElement.closest("code, pre, math")) texts.push(walker.currentNode);
-  const subRe = /([A-Za-zα-ωΑ-Ω0-9₀-₉)])_([A-Za-z0-9ก-๙]+)/g;
+  // subscript = one optional capital + lowercase/digits (P_iV_i -> P<sub>i</sub>V<sub>i</sub>, ρ_Hg, P_net) or Thai
+  const subRe = /([A-Za-zα-ωΑ-Ω0-9₀-₉)])_([A-Z]?[a-z0-9]+|[A-Z]|[ก-๙]+)/g;
   texts.forEach((t) => {
     if (!subRe.test(t.data)) return;
     const span = document.createElement("span");
@@ -92,6 +93,11 @@ await page.evaluate((exam) => {
     let len = 0;
     for (let n = h.nextElementSibling; n && n.tagName !== "H1"; n = n.nextElementSibling) len += n.textContent.length;
     if (len > 2500) h.classList.add("new-page");
+  });
+
+  // Long tables may split between rows (header repeats) instead of leaving a half-empty page
+  document.querySelectorAll("table").forEach((t) => {
+    if (t.querySelectorAll("tbody tr").length > 8) t.classList.add("long");
   });
 
   if (!exam) return;

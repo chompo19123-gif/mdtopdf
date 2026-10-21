@@ -16,3 +16,4 @@
 - `output/biodiversity-lab12-summary.pdf` สรุปก่อนสอบ บทปฏิบัติการที่ 12 ความหลากหลายทางนิเวศวิทยา (Biodiversity in ecosystem)
 - `output/english1-final-cheatsheet.pdf` สรุปอ่านก่อนสอบ English I (080103001) Final
 - `output/physics-exam-summary.pdf` สรุปอ่านก่อนสอบ ฟิสิกส์ (ความร้อน / ของไหล / ไฟฟ้ากระแส)
+- `output/physics-exam-cheatsheet.pdf` สรุปก่อนสอบฟิสิกส์ (ของไหล + ความร้อน + ไฟฟ้ากระแสตรง) ฉบับกฎเหล็กและทริคข้อประยุกต์
