@@ -107,6 +107,36 @@ await page.evaluate((exam) => {
     d.innerHTML = '<div class="label">คำตอบ</div>' + '<div class="ln"></div>'.repeat(lines);
     return d;
   };
+  // Multiple-choice questions written as "**1.** question" + a list of choices (ก. ข. ค. ...):
+  // wrap each question so it never splits across pages, then add a choice row and working lines
+  document.querySelectorAll("body > p").forEach((p) => {
+    const num = p.firstElementChild;
+    if (!num || num.tagName !== "STRONG" || p.firstChild !== num || !/^\d+\.$/.test(num.textContent.trim())) return;
+    const q = document.createElement("div");
+    q.className = "question";
+    p.before(q);
+    q.appendChild(p);
+    let choices = null;
+    while (q.nextElementSibling && /^(UL|OL|BLOCKQUOTE|TABLE)$/.test(q.nextElementSibling.tagName)) {
+      const n = q.nextElementSibling;
+      if (n.tagName === "UL" && !choices) { n.classList.add("choices"); choices = n; }
+      q.appendChild(n);
+    }
+    const labels = choices
+      ? [...choices.children].map((li) => (li.textContent.trim().match(/^([ก-ฮ])\./) || [])[1]).filter(Boolean)
+      : [];
+    const calc = /คำนวณ|จงหา|เท่าไร|เท่าใด|ผลลัพธ์|\d+(\.\d+)?\s*(กรัม|mL|ml|ซม|M\b)/.test(p.textContent);
+    const ans = box(calc ? 3 : 1);
+    ans.querySelector(".label").innerHTML = calc ? "แสดงวิธีคิด / คำตอบ" : "บันทึก";
+    if (labels.length) {
+      const row = document.createElement("div");
+      row.className = "pick";
+      row.innerHTML = "<span>ตอบ</span>" + labels.map((l) => `<span class="opt">${l}</span>`).join("");
+      ans.prepend(row);
+    }
+    q.appendChild(ans);
+  });
+
   // Questions = top-level ordered list items, plus headings that start with "ข้อ" / "โจทย์"
   document.querySelectorAll("body > ol > li").forEach((li) => li.appendChild(box(4)));
   document.querySelectorAll("h2, h3, h4").forEach((h) => {

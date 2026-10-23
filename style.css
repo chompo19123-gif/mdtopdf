@@ -208,3 +208,40 @@ hr { display: none; } /* section breaks handled by headings */
 }
 
 sub { font-size: 0.72em; line-height: 0; vertical-align: -0.25em; }
+
+/* Multiple-choice question block (exam mode) */
+.question { break-inside: avoid; page-break-inside: avoid; margin: 0 0 6px; }
+.question > p:first-child { margin: 10px 0 4px; }
+.question > p:first-child > strong:first-child {
+  display: inline-block;
+  min-width: 24px;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 4px;
+  padding: 0 6px;
+  margin-right: 4px;
+  text-align: center;
+}
+ul.choices { list-style: none; padding-left: 30px; margin: 2px 0 6px; }
+ul.choices > li { margin: 1px 0; }
+.question blockquote { margin: 6px 0 8px; }
+.answer-space .pick {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10pt;
+  color: var(--navy);
+  font-weight: 600;
+  padding: 2px 0 4px;
+}
+.answer-space .pick .opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px; height: 20px;
+  border: 1.4px solid var(--blue);
+  border-radius: 50%;
+  font-weight: 400;
+  font-size: 9.5pt;
+}
+.answer-space .pick + .label { margin-top: 2px; }
