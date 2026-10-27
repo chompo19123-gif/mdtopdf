@@ -245,3 +245,8 @@ ul.choices > li { margin: 1px 0; }
   font-size: 9.5pt;
 }
 .answer-space .pick + .label { margin-top: 2px; }
+
+/* Line breaks typed inside a callout stay as separate lines */
+blockquote p { white-space: pre-line; }
+/* Heading + short callout + table stay on the same page */
+h2 + blockquote + *, h3 + blockquote + * { break-before: avoid; page-break-before: avoid; }

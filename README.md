@@ -8,7 +8,7 @@
     node convert.mjs input/ไฟล์.md                # ไฟล์สรุป แปลงตามปกติ
     node convert.mjs input/ไฟล์.md --exam         # ไฟล์ข้อสอบ เว้นช่องเขียนคำตอบให้ทุกข้อ
 
-ไฟล์ PDF จะอยู่ในโฟลเดอร์ `output/`
+ไฟล์ PDF จะอยู่ในโฟลเดอร์ `output/` (ถ้า Chromium ของ Playwright ไม่ตรงเวอร์ชัน ตั้ง `CHROMIUM_PATH=/path/to/chromium` ก่อนรัน)
 
 ## ไฟล์ที่แปลงแล้ว
 
@@ -18,3 +18,4 @@
 - `output/physics-exam-summary.pdf` สรุปอ่านก่อนสอบ ฟิสิกส์ (ความร้อน / ของไหล / ไฟฟ้ากระแส)
 - `output/physics-exam-cheatsheet.pdf` สรุปก่อนสอบฟิสิกส์ (ของไหล + ความร้อน + ไฟฟ้ากระแสตรง) ฉบับกฎเหล็กและทริคข้อประยุกต์
 - `output/chemistry-exam-questions.pdf` ชุดโจทย์เคมี 80 ข้อ (ข้อสอบ มีช่องกาคำตอบและพื้นที่แสดงวิธีคิดทุกข้อ)
+- `output/chemistry-lab-exam-notes.pdf` โน้ตพร้อมสอบ แลปเคมีประยุกต์ (Lab 1–8) พร้อมเช็กลิสต์กับดักก่อนเข้าห้องสอบ

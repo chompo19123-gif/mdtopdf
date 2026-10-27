@@ -25,7 +25,7 @@ const output = resolve(outArg ?? join(here, "output", basename(input).replace(/\
 // 1. Markdown -> HTML body (pandoc, GitHub flavour: tables, task lists; $...$ math)
 const body = execFileSync(
   "pandoc",
-  ["-f", "gfm+tex_math_dollars", "-t", "html5", "--mathml", "--wrap=none", resolve(input)],
+  ["-f", "gfm+tex_math_dollars", "-t", "html5", "--mathml", "--wrap=preserve", resolve(input)],
   { encoding: "utf8" }
 );
 
@@ -52,7 +52,7 @@ const html = `<!doctype html>
 <body>${body}</body></html>`;
 
 // 3. Render with Chromium
-const browser = await chromium.launch();
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 const page = await browser.newPage();
 await page.setContent(html, { waitUntil: "load" });
 await page.evaluate(() => document.fonts.ready);
