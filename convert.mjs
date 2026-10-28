@@ -155,7 +155,15 @@ await page.evaluate((exam) => {
     if (/^(ข้อ|โจทย์|คำถาม|Question|Q\d)/i.test(h.textContent.trim())) {
       let n = h.nextElementSibling;
       while (n && !/^H[1-4]$/.test(n.nextElementSibling?.tagName ?? "H1")) n = n.nextElementSibling;
-      (n ?? h).after(box(6));
+      // "(5 ข้อย่อย)" in the heading -> 3 lines per sub-question
+      const sub = Number((h.textContent.match(/(\d+)\s*ข้อย่อย/) || [])[1]);
+      const ans = box(sub ? sub * 3 : 6);
+      (n ?? h).after(ans);
+      // keep heading, question text and answer box on one page
+      const wrap = document.createElement("div");
+      wrap.className = "question";
+      h.before(wrap);
+      for (let e = h; e; ) { const next = e === ans ? null : e.nextElementSibling; wrap.appendChild(e); e = next; }
     }
   });
 }, exam);
