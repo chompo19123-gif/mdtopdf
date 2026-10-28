@@ -52,7 +52,7 @@ const html = `<!doctype html>
 <body>${body}</body></html>`;
 
 // 3. Render with Chromium
-const browser = await chromium.launch();
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 const page = await browser.newPage();
 await page.setContent(html, { waitUntil: "load" });
 await page.evaluate(() => document.fonts.ready);
@@ -70,6 +70,18 @@ await page.evaluate((exam) => {
     sub.textContent = exam ? "แบบทดสอบ / ข้อสอบ" : "เอกสารสรุปเนื้อหา";
     banner.appendChild(sub);
     banner.style.breakBefore = "auto";
+  }
+
+  // Bold markers that pandoc left literal (Thai text has no spaces, so "**x**ต่อ" is not parsed as bold)
+  {
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const hit = [];
+    while (w.nextNode()) if (/\*\*[^*]+\*\*/.test(w.currentNode.data) && !w.currentNode.parentElement.closest("code, pre")) hit.push(w.currentNode);
+    hit.forEach((t) => {
+      const span = document.createElement("span");
+      span.innerHTML = t.data.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      t.replaceWith(...span.childNodes);
+    });
   }
 
   // Plain-text subscripts in formulas: V_จม, P_net, ρ_วัตถุ -> <sub>

@@ -18,3 +18,4 @@
 - `output/physics-exam-summary.pdf` สรุปอ่านก่อนสอบ ฟิสิกส์ (ความร้อน / ของไหล / ไฟฟ้ากระแส)
 - `output/physics-exam-cheatsheet.pdf` สรุปก่อนสอบฟิสิกส์ (ของไหล + ความร้อน + ไฟฟ้ากระแสตรง) ฉบับกฎเหล็กและทริคข้อประยุกต์
 - `output/chemistry-exam-questions.pdf` ชุดโจทย์เคมี 80 ข้อ (ข้อสอบ มีช่องกาคำตอบและพื้นที่แสดงวิธีคิดทุกข้อ)
+- `output/bio-full-review-guide.pdf` คู่มือทบทวนชีววิทยา Topic 9 ถึง 14 (ไฟล์สรุป 29 หน้า)
